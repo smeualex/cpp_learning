@@ -1,0 +1,18 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+        {
+          "label": "Build everything",
+          "type": "shell",
+          "command": "./build.py build",
+          "windows": {
+            "command": ".\\build.py build"
+          },
+          "group": "build",
+          "presentation": {
+            "reveal": "silent",
+            "panel": "shared"
+          }
+        }
+      ]
+}
