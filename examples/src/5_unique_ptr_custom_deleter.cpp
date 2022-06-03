@@ -51,7 +51,7 @@ public:
         // create an unique_ptr with nullptr
         auto rp = std::unique_ptr<Resource, Deleter>(nullptr, Deleter());
 
-        cout << endl << __FUNCTION__ << endl;
+        cout << endl << "    " << __FUNCTION__ << endl;
         // find first free Resource
         for(auto& r: resources) {
             cout << "       r.isFree=" << r.isFree << endl;
@@ -61,6 +61,7 @@ public:
                 break;
             }
         }
+        cout << endl;
 
         return rp;
     }
@@ -102,8 +103,22 @@ void do_stuff() {
         cout << "No resource free in the pool" << endl;
     }
 
-    cout << "Trying to get a resource" << endl;
+    // here we should get a nullptr back
+    cout << "Trying to get a resource - we expect an error" << endl;
     ResourcePtr rp4 = pool.get();
+    if(rp4) {
+        cout << "Resource 4 retrieved; Changing value to 324. " << endl;
+        rp4->val = 324;
+    } else {
+        cout << "No resource free in the pool" << endl;
+    }
+
+    cout << "Releasing rp3..." << endl;
+    Resource* tmp = rp3.release();
+    delete tmp;
+
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~ Trying to get a resource again" << endl;
+    rp4 = pool.get();
     if(rp4) {
         cout << "Resource 4 retrieved; Changing value to 324. " << endl;
         rp4->val = 324;
