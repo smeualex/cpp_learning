@@ -1,8 +1,0 @@
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/CMakeFiles/ALL_BUILD.dir
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/CMakeFiles/ZERO_CHECK.dir
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/examples/CMakeFiles/0_template.dir
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/examples/CMakeFiles/1_std_function_dispatch_table.dir
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/examples/CMakeFiles/2_pairs_tuples.dir
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/examples/CMakeFiles/3_reference_wrapper.dir
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/examples/CMakeFiles/4_unique_ptr.dir
-D:/GitHub/smeualex/stl_examples/build/Win32/Release/examples/CMakeFiles/5_unique_ptr_custom_deleter.dir
