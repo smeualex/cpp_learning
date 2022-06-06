@@ -48,5 +48,15 @@ endif()
 #print_all_variables()
 
 
+# clear the output directory
+# remove the executables and the generated PDBs
+file(GLOB_RECURSE EXECUTABLES_TO_CLEAN 
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/**/*.exe
+    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/**/*.pdb)
+
+file (REMOVE
+    ${EXECUTABLES_TO_CLEAN}
+)
+
 # add subdirectories
 add_subdirectory(examples)
