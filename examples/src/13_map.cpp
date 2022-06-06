@@ -12,6 +12,14 @@ using std::endl;
 using std::map;
 using std::make_pair;
 
+///////////////////////////////////////////////////////////////////////////////
+// Some info regarding insert into a map
+//      https://stackoverflow.com/a/4286924/13267900
+//
+
+
+// generic test functions
+//   work with map or underdered_map
 template <typename Cont>
 void print_map(const Cont& m){
     cout << " > Map - size = " << m.size() << ": " << endl;
@@ -33,6 +41,19 @@ void test_map() {
     stringIntMap["three"] = 3;
     print_map(stringIntMap);
 
+    cout << " - Adding a new element with identical key to a preexistent one" << endl;
+    cout << "    > using asignment operatr => this will update the existing key" << endl;
+    stringIntMap["two"] = 33;
+    print_map(stringIntMap);
+
+    cout << "    > using map.insert => this FAILS" << endl;
+    auto tmp = stringIntMap.insert(std::pair<std::string, int>{"two", 999});
+    if(tmp.second) 
+        cout << "  > insert OK" << endl;
+    else
+        cout << "  > insert failed. key exists already!" << endl;
+    print_map(stringIntMap);
+
     cout << " - erasing a element \"two\"" << endl;
     stringIntMap.erase("two");
     print_map(stringIntMap);
@@ -40,6 +61,7 @@ void test_map() {
     cout << " - clearing map" << endl;
     stringIntMap.clear();
     print_map(stringIntMap);
+    
     
 }
 
