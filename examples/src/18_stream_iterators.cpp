@@ -1,13 +1,4 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-#include <vector>
-#include <iterator>
-#include <queue>
-#include <iomanip>
+#include "headers.h"
 
 using std::cout;
 using std::endl;

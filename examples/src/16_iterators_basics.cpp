@@ -1,15 +1,4 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-#include <vector>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
+#include "headers.h"
 
 
 void map_iterator() {

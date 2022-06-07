@@ -1,15 +1,4 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-#include <memory>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
+#include "headers.h"
 
 // SOURCE
 //   https://www.nextptr.com/question/qa1366990479/unique_ptr-with-custom-deleter

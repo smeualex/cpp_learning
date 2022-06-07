@@ -1,21 +1,8 @@
-#include <iostream>
+#include "headers.h"
 
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-
-#include <iomanip>
 #include <type_traits>
 
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
-
 class A {};
-
-
 
 template <class T>
 T f(T i) {

@@ -1,17 +1,6 @@
-#include <iostream>
-
-#include <iostream>
-#include <functional>
-#include <map>
-#include <string>
-
+#include "headers.h"
 #include <utility>          // needed by pair ?!
 #include <tuple>            // for tuples, dooh
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
 
 void pair_demo() {
     std::pair<const char*, double> charDoub1("str1", 3.14);

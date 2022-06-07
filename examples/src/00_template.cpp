@@ -1,14 +1,4 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
+#include "headers.h"
 
 // our main stuff go here :)
 void do_stuff() {

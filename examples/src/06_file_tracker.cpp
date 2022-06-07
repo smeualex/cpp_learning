@@ -1,18 +1,7 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-#include <vector>
+#include "headers.h"
 
 #include <cstdio>
 #include <cstdlib>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
 
 using FileCloser = std::function<void(std::FILE*)>;
 using FilePtr =  std::unique_ptr<FILE, FileCloser>;

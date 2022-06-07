@@ -1,12 +1,4 @@
-#include <iostream>
-#include <functional>
-#include <map>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
-
+#include "headers.h"
 
 int main(int argc, char** argv) {
     

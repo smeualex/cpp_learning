@@ -1,17 +1,6 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
+#include "headers.h"
 
 #include <type_traits>
-#include <iomanip>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
 
 #define SHOW(...) std::cout << std::setw(64) << #__VA_ARGS__ << " == " << __VA_ARGS__ << '\n'
 

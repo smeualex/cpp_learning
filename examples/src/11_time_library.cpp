@@ -1,18 +1,6 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-#include <vector>
+#include "headers.h"
 
 #include <chrono>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
-
 
 using SteadyClock  = std::chrono::steady_clock;
 using HighResClock = std::chrono::high_resolution_clock;

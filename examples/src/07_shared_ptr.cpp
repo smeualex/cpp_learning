@@ -1,18 +1,10 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
+#include "headers.h"
 
 #include <memory>
 
 #include "MyInt.h"
 
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
+
 
 //  The helper function std::make_shared25 creates the resource and returns it in a std::shared_ptr.
 // You should use std::make_shared instead of the direct creation of a std::shared_ptr, because

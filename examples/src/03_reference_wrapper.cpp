@@ -1,19 +1,6 @@
-#include <iostream>
+#include "headers.h"
 
-#include <algorithm>    // copy_if
-#include <iterator>     // back_inserter
-#include <iostream>
-#include <functional>
-#include <map>
-#include <vector>
-#include <string>
 #include <thread>
-
-using std::vector;
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
 
 // SOURCES
 //  https://www.nextptr.com/tutorial/ta1441164581/stdref-and-stdreference_wrapper-common-use-cases

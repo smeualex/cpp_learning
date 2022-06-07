@@ -1,14 +1,6 @@
-#include <iostream>
+#include "headers.h"
 
-#include <string>
-#include <iostream>
 #include <chrono>
-#include <vector>
-
-using std::cout;
-using std::endl;
-using std::vector;
-
 
 class PerfMonitor
 {

@@ -1,16 +1,6 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
+#include "headers.h"
 
 #include <memory>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
 
 //      You can create with the class std::enable_shared_from_this26 objects which return a 
 // std::shared_ptr on itself. For that you have to derive the class public from 

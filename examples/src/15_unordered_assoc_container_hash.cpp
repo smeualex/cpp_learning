@@ -1,16 +1,4 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-
-#include <unordered_map>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
+#include "headers.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The Hash Function

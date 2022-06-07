@@ -1,17 +1,7 @@
-#include <iostream>
+#include "headers.h"
 
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
-#include <unordered_map>
 #include <random>
 #include <chrono>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
 
 using std::chrono::duration;
 static const long long mapSize= 20000000;

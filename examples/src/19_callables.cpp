@@ -1,20 +1,4 @@
-#include <iostream>
-
-#include <string>
-#include <iomanip>
-#include <iostream>
-#include <functional>
-#include <map>
-
-#include <vector>
-#include <algorithm>        // for_each
-
-#include <functional>       // for predefined function object: std::less, std::greater
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
+#include "headers.h"
 
 
 std::vector<int> v { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };

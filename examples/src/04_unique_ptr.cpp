@@ -1,28 +1,7 @@
-#include <iostream>
-
-#include <string>
-#include <iostream>
-#include <functional>
-#include <map>
+#include "headers.h"
+#include "MyInt.h"
 
 #include <memory>
-
-using std::cout;
-using std::endl;
-using std::map;
-using std::make_pair;
-
-class MyInt {
-public:
-    int i;
-    MyInt(int _i) : i(_i) {
-        cout << "> MyInt() constructor; i="<< i << endl;
-    }
-    ~MyInt() {
-        cout << "> ~MyInt() destructor; i=" << i << endl;
-    }
-};
-
 
 class C {
 private:
