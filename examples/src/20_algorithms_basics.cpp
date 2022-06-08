@@ -1,28 +1,27 @@
 #include "headers.h"
 
+template <typename Cont>
+void print(Cont cont, const std::string& msg) {
+    cout << msg << ": " << endl;
+
+    cout << " > [size=" << std::setw(3) << cont.size() << "]: ";
+    for(const auto c: cont)
+        std::cout << c << " ";
+    cout << endl;
+}
+
 // do the same "stuff" on different containers
 //
 template<typename Cont, typename T>
 void do_algorithm(Cont cont, T t) {
 
-    cout << "Initial container: ";
-    for(const auto c: cont)
-        std::cout << c << " ";
-    cout << endl;
+    print(cont, "Initial container");
 
     std::reverse(cont.begin(), cont.end());
-
-    cout << "Reversed 1 : ";
-    cout << "Reversed 1 : ";
-    for(const auto c: cont)
-        std::cout << c << " ";
-    cout << endl;
+    print(cont, "Reversed 1");
 
     std::reverse(cont.begin(), cont.end());
-    cout << "Reversed 2 : ";
-    for(const auto c: cont)
-        std::cout << c << " ";
-    cout << endl;
+    print(cont, "Reversed 2");
 
     cout << "Finding element [" << t << "] in the container" << endl;
     auto it = std::find(cont.begin(), cont.end(), t);
@@ -35,10 +34,7 @@ void do_algorithm(Cont cont, T t) {
     cout << "Reversing container from the found element up to the end" << endl;
     std::reverse(it, cont.end());
 
-    cout << "Resulting container: ";
-    for(const auto c: cont)
-        std::cout << c << " ";
-    cout << endl << endl;
+    print(cont, "Resulting container");
 }
 
 // our main stuff go here :)
