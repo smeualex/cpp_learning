@@ -310,7 +310,6 @@ def main(args):
         delete_build_dir()
 
     elif args.cmd == 'build':
-        set_build_directory()
         build(args)
 
         if args.toolchain != None:
@@ -320,6 +319,8 @@ if __name__ == "__main__":
     cd_to_script_location()
     args = parse_arguments()
     init_logging()
+    set_build_directory()
+    
     # we are going
     log.info('')
     log.info('')
