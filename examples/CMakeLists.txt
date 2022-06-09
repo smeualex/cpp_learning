@@ -2,6 +2,13 @@
 # get all the source files
 file( GLOB SRCS src/*.cpp)
 
+if (MSVC)
+    add_compile_options(/MP)
+else()
+    add_compile_options(-Wall -pedantic)
+endif()
+
+
 message(STATUS " ${PROJECT_NAME}  |  Generating executables: ")
 # generate an executable for each one
 foreach(SRC ${SRCS})

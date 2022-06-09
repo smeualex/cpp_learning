@@ -21,7 +21,14 @@ option( BUILD_TESTS         "Build unit tests."                           OFF )
 option( RUN_ALL_TESTS       "Run all tests sepparately"                   OFF )
 option( RUN_CPPCHECK        "Run Cppcheck static analysis on all sources" OFF )
 option( VERBOSE_OUTPUT      "Log verbose build information"               OFF )
-option( DEV_BUILD           "Build for development. Use pss.ro in whitelisted domains" OFF)
+
+# set common runtime output directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+# set verbose makefile to see the actual build commands sent to the compiler
+set(CMAKE_VERBOSE_MAKEFILE on)
 
 ###############################################################################
 # Log all build options
@@ -39,3 +46,4 @@ macro(print_options)
 	message(STATUS " ${PROJECT_NAME}  |  >>>>> ")
 	message(STATUS " ${PROJECT_NAME}  |  ---------------------------------------------------------------------")
 endmacro()
+
