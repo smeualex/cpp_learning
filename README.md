@@ -1,4 +1,12 @@
-# Sample programs from Reiner Grimm's STL book
+# Sample programs 
+
+The samples are mainly from Reiner Grimm's STL book.
+
+## Prerequisites
+
+- A modern C++ compiler: like VisualStudio 2015 or 2019.
+- CMake - latest version.
+- Python 3
 
 ## Building
 
