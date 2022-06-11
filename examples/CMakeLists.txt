@@ -1,6 +1,9 @@
 
 # get all the source files
-file( GLOB SRCS src/*.cpp)
+file( GLOB SRCS 
+    src/*.cpp
+    concurrency/*.cpp
+)
 
 if (MSVC)
     add_compile_options(/MP)
@@ -16,4 +19,7 @@ foreach(SRC ${SRCS})
     # string( REPLACE ".cpp" "" EXECUTABLE_NAME ${SRC})
     message(STATUS " ${PROJECT_NAME}  |     > ${EXECUTABLE_NAME} ")
     add_executable( ${EXECUTABLE_NAME} ${SRC})
+    target_include_directories(${EXECUTABLE_NAME} PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+    )
 endforeach()
