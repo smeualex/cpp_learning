@@ -22,11 +22,6 @@ option( RUN_ALL_TESTS       "Run all tests sepparately"                   OFF )
 option( RUN_CPPCHECK        "Run Cppcheck static analysis on all sources" OFF )
 option( VERBOSE_OUTPUT      "Log verbose build information"               OFF )
 
-# set common runtime output directory
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
-
 # set verbose makefile to see the actual build commands sent to the compiler
 set(CMAKE_VERBOSE_MAKEFILE on)
 
@@ -47,3 +42,22 @@ macro(print_options)
 	message(STATUS " ${PROJECT_NAME}  |  ---------------------------------------------------------------------")
 endmacro()
 
+
+macro(set_runtime_directory subdir)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE  ${CMAKE_SOURCE_DIR}/bin/${subdir})
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY          ${CMAKE_SOURCE_DIR}/bin/${subdir})
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY          ${CMAKE_SOURCE_DIR}/bin/${subdir})
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY          ${CMAKE_SOURCE_DIR}/bin/${subdir})
+endmacro()
+
+MACRO(COPY_FILE_IF_CHANGED in_file out_file target)
+IF(${in_file} IS_NEWER_THAN ${out_file})    
+    message("   > Copying file: ${in_file} to: ${out_file}")
+    ADD_CUSTOM_COMMAND (
+        TARGET     ${target}
+        POST_BUILD
+        COMMAND    ${CMAKE_COMMAND}
+        ARGS       -E copy ${in_file} ${out_file}
+    )
+ENDIF(${in_file} IS_NEWER_THAN ${out_file})
+ENDMACRO(COPY_FILE_IF_CHANGED)

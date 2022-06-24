@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 
-project(stl_learning VERSION 1.0.0 LANGUAGES CXX)
+project(cpp_learning VERSION 1.1.0 LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH 
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
@@ -30,3 +30,4 @@ endif()
 
 # add subdirectories to the build
 add_subdirectory(examples)
+add_subdirectory(design_patterns)

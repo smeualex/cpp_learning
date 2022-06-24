@@ -2,8 +2,10 @@
 # get all the source files
 file( GLOB SRCS 
     src/*.cpp
-    concurrency/*.cpp
 )
+
+# set common runtime output directory
+set_runtime_directory(design_patterns)
 
 if (MSVC)
     add_compile_options(/MP)
@@ -11,8 +13,6 @@ else()
     add_compile_options(-Wall -pedantic)
 endif()
 
-# set common runtime output directory
-set_runtime_directory(stl)
 
 message(STATUS " ${PROJECT_NAME}  |  Generating executables: ")
 # generate an executable for each one
