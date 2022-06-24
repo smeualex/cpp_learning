@@ -13,6 +13,12 @@ endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+if (MSVC)
+    add_compile_options(/MP)
+else()
+    add_compile_options(-Wall -pedantic)
+endif()
+
 ###############################################################################
 # Build options
 ###############################################################################

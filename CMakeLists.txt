@@ -29,5 +29,5 @@ if(EXECUTABLES_TO_CLEAN)
 endif()
 
 # add subdirectories to the build
-add_subdirectory(examples)
+add_subdirectory(std)
 add_subdirectory(design_patterns)
