@@ -19,8 +19,8 @@ print_project_variables()
 # clear the output directory
 # remove the executables and the generated PDBs
 file(GLOB_RECURSE EXECUTABLES_TO_CLEAN 
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/**/*.exe
-    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/**/*.pdb)
+    bin/**/*.exe
+    bin/**/*.pdb)
 
 if(EXECUTABLES_TO_CLEAN)
     file (REMOVE
