@@ -34,3 +34,4 @@
 *.log
 bin
 build
+.vs

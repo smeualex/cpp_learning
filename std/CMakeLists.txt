@@ -1,2 +1,3 @@
 add_subdirectory(stl)
 add_subdirectory(concurrency)
+add_subdirectory(templates)

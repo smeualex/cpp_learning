@@ -3,6 +3,40 @@
 #include<thread>
 #include<chrono>
 
+
+///////////////////////////////////////////////////////////////////////////////////
+//
+// DESCRIPTION
+// 
+// 1. Objects (DigitalClock or AnalogClock object) use the Subject interfaces 
+//    (Attach() or Detach()) either to subscribe (register) as observers or 
+//    unsubscribe (remove) themselves from being observers 
+//    (subject.Attach(*this); , subject.Detach(*this);.
+//
+// 2. Each subject can have many observers( vector<Observer*> observers;).
+//
+// 3. All observers need to implement the Observer interface. 
+//    This interface just has one method, Update(), that gets called when 
+//    the Subject's state changes (Update(Subject &))
+//
+// 4. In addition to the Attach() and Detach() methods, the concrete subject 
+//    implements a Notify() method that is used to update all the current observers 
+//    whenever state changes. 
+//    But in this case, all of them are done in the parent class, 
+//      Subject (Subject::Attach (Observer&), 
+//      void Subject::Detach(Observer&) and 
+//      void Subject::Notify() .
+//
+// 5. The Concrete object may also have methods for setting and getting its state.
+//
+// 6. Concrete observers can be any class that implements the Observer interface.
+//    Each observer subscribe (register) with a concrete subject to receive update 
+//    (subject.Attach(*this); ).
+//
+// 7. The two objects of Observer Pattern are loosely coupled, they can interact
+//    but with little knowledge of each other.
+//
+///////////////////////////////////////////////////////////////////////////////////
 using std::cout;
 using std::endl;
 
@@ -19,7 +53,7 @@ private:
     std::vector<Observer*> observers;
 
 public:
-    virtual~Subject() = default;
+    virtual ~Subject() = default;
     
     void Attach(Observer& o) {
         cout << "  > Attaching observer... " << endl;

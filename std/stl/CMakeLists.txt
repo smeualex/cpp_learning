@@ -2,6 +2,11 @@
 file( GLOB SRCS 
     src/*.cpp
 )
+# remove the template source
+list(REMOVE_ITEM SRCS 
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/00_template.cpp"
+)
+
 
 # set common runtime output directory
 set_runtime_directory(stl)
