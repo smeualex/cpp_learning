@@ -31,3 +31,4 @@ endif()
 # add subdirectories to the build
 add_subdirectory(std)
 add_subdirectory(design_patterns)
+add_subdirectory(algorithms)
