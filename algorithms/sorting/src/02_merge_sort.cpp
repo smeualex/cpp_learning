@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -25,8 +26,8 @@ void merge(int array[], const int left, const int mid, const int right)
     auto const arr2Size = right - mid;
  
     // Create temp arrays
-    int* leftArray  = new int[arr1Size];
-    int* rightArray = new int[arr2Size];
+    auto leftArray  = std::make_unique<int[]>(arr1Size);
+    auto rightArray = std::make_unique<int[]>(arr2Size);
  
     // Copy data to temp arrays leftArray[] and rightArray[]
     for (auto i = 0; i < arr1Size; i++)
