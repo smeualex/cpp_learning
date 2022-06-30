@@ -21,60 +21,58 @@ void merge(int array[], const int left, const int mid, const int right)
     cout << " merge " << i++ << ": left=" << left 
         << "; mid=" << mid << "; right=" << right << "; ";
     
-    const int s1Size = mid - left + 1;
-    const int s2Size = right - mid;
-
+    auto const arr1Size = mid - left + 1;
+    auto const arr2Size = right - mid;
+ 
     // Create temp arrays
-    int* leftArray  = new int[s1Size];
-    int* rightArray = new int[s2Size];
+    int* leftArray  = new int[arr1Size];
+    int* rightArray = new int[arr2Size];
  
     // Copy data to temp arrays leftArray[] and rightArray[]
-    for (auto i = 0; i < s1Size; i++)
+    for (auto i = 0; i < arr1Size; i++)
         leftArray[i] = array[left + i];
 
-    for (auto j = 0; j < s2Size; j++)
+    for (auto j = 0; j < arr2Size; j++)
         rightArray[j] = array[mid + 1 + j];
  
-    int indexOfSubArrayOne = 0;    // Initial index of first sub-array
-    int indexOfSubArrayTwo = 0;    // Initial index of second sub-array
-    int indexOfMergedArray = left; // Initial index of merged array
+    int index1 = 0;         // Initial index of first sub-array
+    int index2 = 0;         // Initial index of second sub-array
+    int indexMerged = left; // Initial index of merged array
  
     // Merge the temp arrays back into array[left..right]
-    while (indexOfSubArrayOne < s1Size && indexOfSubArrayTwo < s2Size) 
+    while (index1 < arr1Size && index2 < arr2Size) 
     {
-        if (leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo]) 
+        if (leftArray[index1] <= rightArray[index2]) 
         {
-            array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-            indexOfSubArrayOne++;
+            array[indexMerged] = leftArray[index1];
+            index1++;
         }
         else 
         {
-            array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-            indexOfSubArrayTwo++;
+            array[indexMerged] = rightArray[index2];
+            index2++;
         }
-        indexOfMergedArray++;
-    }
-    // Copy the remaining elements of
-    // left[], if there are any
-    while (indexOfSubArrayOne < s1Size) 
-    {
-        array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
-        indexOfSubArrayOne++;
-        indexOfMergedArray++;
-    }
-    // Copy the remaining elements of
-    // right[], if there are any
-    while (indexOfSubArrayTwo < s2Size) 
-    {
-        array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
-        indexOfSubArrayTwo++;
-        indexOfMergedArray++;
+
+        indexMerged++;
     }
 
-    delete[] leftArray;
-    delete[] rightArray;
+    // Copy any remaining elements
+    // leftArray
+    while (index1 < arr1Size) 
+    {
+        array[indexMerged] = leftArray[index1];
+        index1++;
+        indexMerged++;
+    }
+    // rightArray
+    while (index2 < arr2Size) 
+    {
+        array[indexMerged] = rightArray[index2];
+        index2++;
+        indexMerged++;
+    }
 
-    printArray(array, 6);
+     printArray(array, 6);
 }
 
 void mergeSort(int array[], const int begin, const int end) 
