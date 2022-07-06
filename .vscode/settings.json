@@ -73,6 +73,7 @@
         "queue": "cpp",
         "condition_variable": "cpp",
         "future": "cpp",
-        "mutex": "cpp"
+        "mutex": "cpp",
+        "fstream": "cpp"
     }
 }
