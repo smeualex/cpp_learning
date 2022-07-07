@@ -1,3 +1,5 @@
+#pragma once
+
 #include <algorithm>
 #include <queue>
 #include <memory>
@@ -9,7 +11,6 @@ template <typename key_t>
 class BST {
 private:
 
-    template <typename key_t>
     struct node {
         key_t key;                  
         std::weak_ptr<node> parent; 
@@ -24,9 +25,9 @@ private:
         }
     };
 
-    std::shared_ptr<node <key_t> > root;
+    std::shared_ptr<node> root;
     
-    void pre_order_traversal(const std::shared_ptr<node <key_t> > &x, void handler(std::shared_ptr<node <key_t> >)) const {
+    void pre_order_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const {
         if (x == nullptr) 
             return;
         
@@ -35,7 +36,7 @@ private:
         pre_order_traversal(x->left, handler);
         pre_order_traversal(x->right, handler);
     }
-    void in_order_traversal(const std::shared_ptr<node <key_t> > &x, void handler(std::shared_ptr<node <key_t> >)) const{
+    void in_order_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const{
         if (x == nullptr) 
             return;
         
@@ -45,7 +46,7 @@ private:
         
         in_order_traversal(x->right, handler);
     }
-    void post_order_traversal(const std::shared_ptr<node <key_t> > &x, void handler(std::shared_ptr<node <key_t> >)) const {
+    void post_order_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const {
         if (x == nullptr) 
             return;
         
@@ -55,15 +56,15 @@ private:
         handler(x);
     }
 
-    void breadth_first_traversal(const std::shared_ptr<node <key_t> > &x, void handler(std::shared_ptr<node <key_t> >)) const {
+    void breadth_first_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const {
         if (x == nullptr) 
             return;
         
-        std::queue <std::shared_ptr<node <key_t> > > queue;
+        std::queue <std::shared_ptr<node> > queue;
         
         queue.push(x);
         while(queue.empty() == false) {
-            std::shared_ptr<node <key_t> > y = queue.front();
+            std::shared_ptr<node> y = queue.front();
             handler(y);
             queue.pop();
             
@@ -74,13 +75,13 @@ private:
         }
     }
 
-    const unsigned long long height(const std::shared_ptr<node <key_t> > &x) const {
+    const unsigned long long height(const std::shared_ptr<node> &x) const {
         if (x == nullptr)   
             return 0;
         return std::max(height(x->left), height(x->right)) + 1;
     }
 
-    const unsigned long long size(const std::shared_ptr<node <key_t> > &x) const {
+    const unsigned long long size(const std::shared_ptr<node> &x) const {
         if (x == nullptr) 
             return 0;
         return size(x->left) + size(x->right) + 1;
@@ -88,25 +89,25 @@ private:
 
 public:
 
-    void pre_order_traversal(void handler(std::shared_ptr<node <key_t> >)) const {
+    void pre_order_traversal(void handler(std::shared_ptr<node>)) const {
         pre_order_traversal(root, handler);
     }
     
-    void in_order_traversal(void handler(std::shared_ptr<node <key_t> >)) const {
+    void in_order_traversal(void handler(std::shared_ptr<node>)) const {
         in_order_traversal(root, handler);
     }
 
-    void post_order_traversal(void handler(std::shared_ptr<node <key_t> >)) const {
+    void post_order_traversal(void handler(std::shared_ptr<node>)) const {
         post_order_traversal(root, handler);
     }
 
-    void breadth_first_traversal(void handler(std::shared_ptr<node <key_t> >)) const {
+    void breadth_first_traversal(void handler(std::shared_ptr<node>)) const {
         breadth_first_traversal(root, handler);
     }
 
-    const std::shared_ptr<node <key_t> > insert(const key_t key) {
-        std::shared_ptr<node <key_t> > current = root;
-        std::shared_ptr<node <key_t> > parent = nullptr;
+    const std::shared_ptr<node> insert(const key_t key) {
+        std::shared_ptr<node> current = root;
+        std::shared_ptr<node> parent = nullptr;
 
         while(current!=nullptr) {
             parent = current;
@@ -119,7 +120,7 @@ public:
             }
         }
         
-        current = std::make_shared<node <key_t> >(key);
+        current = std::make_shared<node>(key);
         current->parent = parent;
         
         if(parent == nullptr) {
@@ -132,8 +133,8 @@ public:
         return current;
     }
    
-    const std::shared_ptr<node <key_t> > search(const key_t key) const {
-        std::shared_ptr<node <key_t> > x = root;
+    const std::shared_ptr<node> search(const key_t key) const {
+        std::shared_ptr<node> x = root;
         while (x != nullptr) {
             if (key > x->key) {
                x = x->right;
@@ -146,28 +147,28 @@ public:
         return nullptr;
     }
     
-    const std::shared_ptr<node <key_t> > minimum() const {
+    const std::shared_ptr<node> minimum() const {
         if (x == nullptr) 
             return nullptr;
 
-        std::shared_ptr<node <key_t> > x = root;
+        std::shared_ptr<node> x = root;
         while(x->left != nullptr) 
             x = x->left;
         return x;
     }
     
-    const std::shared_ptr<node <key_t> > maximum() const {
+    const std::shared_ptr<node> maximum() const {
         if (x == nullptr) 
             return nullptr;
         
-        std::shared_ptr<node <key_t> > x = root;
+        std::shared_ptr<node> x = root;
         while(x->right != nullptr)
             x = x->right;
         return x;
     }
      
-    const std::shared_ptr<node <key_t> > successor(const key_t key) const {
-        std::shared_ptr<node <key_t> > x = root;
+    const std::shared_ptr<node> successor(const key_t key) const {
+        std::shared_ptr<node> x = root;
         while (x != nullptr) {
             if (key > x->key) {
                 x = x->right;
@@ -181,7 +182,7 @@ public:
                 return x;
             }
 
-            std::shared_ptr<node <key_t> > parent = x->parent.lock();
+            std::shared_ptr<node> parent = x->parent.lock();
             while (parent != nullptr && x == parent->right) {
                 x = parent;
                 parent = parent->parent.lock();
@@ -193,8 +194,8 @@ public:
         return nullptr;
     }
     
-    const std::shared_ptr<node <key_t> > predecessor(const key_t key) const {
-        std::shared_ptr<node <key_t> > x = root;
+    const std::shared_ptr<node> predecessor(const key_t key) const {
+        std::shared_ptr<node> x = root;
         while (x != nullptr) {
             if (key > x->key) {
                 x = x->right;
@@ -207,7 +208,7 @@ public:
                     return x;
                 }
 
-                std::shared_ptr<node <key_t> > parent = x->parent.lock();
+                std::shared_ptr<node> parent = x->parent.lock();
                 while (parent != nullptr && x == parent->left) {
                     x = parent;
                     parent = parent->parent.lock();
