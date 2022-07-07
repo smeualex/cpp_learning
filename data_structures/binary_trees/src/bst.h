@@ -111,10 +111,61 @@ public:
         breadth_first_traversal(root, handler);
     }
 
-    const std::shared_ptr<node> insert(const key_t& key) {
+/// <summary>
+/// Insert a new node in the tree
+/// 
+/// Tree:
+/// 
+///             4
+///            / \
+///           /   \
+///          2    90
+///         / \   /
+///        0   3 14
+///               \
+///               45
+/// 
+/// Suppose we wanted to insert 5:
+///     - after the first while we have:
+///         parent = 14 (actually the node with the key=14)
+///         
+///     - we create the node for current and set up its parent
+///         current = std::make_shared<node>(key);
+///         current->parent = parent;
+///     - now we have:
+///             4
+///            / \
+///           /   \
+///          2    90
+///         / \   /
+///        0   3 14 <--------- parent
+///               \
+///               45
+///         and somewhere a current node with parent set to 14
+///         
+///     - we set up the left or right links of the parent
+///         if the new node has key > parent's key - parent->left = current
+///         otherwise parent->right = current
+/// 
+///     -> exceptional case when we have an empty tree and we set 
+///        the new node to be the root
+/// 
+///             4
+///            / \
+///           /   \
+///          2     90
+///         / \    /
+///        0   3  14
+///              / \
+///             5  45
+///             ^------------ new inserted node
+/// </summary>
+    bool insert(const key_t& key) {
+
         std::shared_ptr<node> current = root;
         std::shared_ptr<node> parent = nullptr;
 
+        // search the tree to get the right place to insert
         while(current!=nullptr) {
             parent = current;
             if (key > current->key) {
@@ -122,13 +173,16 @@ public:
             } else if (key < current->key) {
                 current = current->left;
             } else {
-                return nullptr;
+                // node already exists
+                return false;
             }
         }
         
+        // create the current node
         current = std::make_shared<node>(key);
         current->parent = parent;
         
+        // set up parent link to the current node
         if(parent == nullptr) {
             root = current;
         } else if (current->key > parent->key) {
@@ -136,7 +190,8 @@ public:
         } else if (current->key < parent->key) {
             parent->left = current;
         }
-        return current;
+
+        return true;
     }
    
     const std::shared_ptr<node> search(const key_t key) const {
