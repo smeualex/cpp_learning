@@ -111,7 +111,7 @@ public:
         breadth_first_traversal(root, handler);
     }
 
-    const std::shared_ptr<node> insert(const key_t key) {
+    const std::shared_ptr<node> insert(const key_t& key) {
         std::shared_ptr<node> current = root;
         std::shared_ptr<node> parent = nullptr;
 
