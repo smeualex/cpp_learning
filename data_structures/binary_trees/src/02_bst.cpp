@@ -4,6 +4,21 @@
 using std::cout;
 using std::endl;
 
+/// <summary>
+/// Create a demo-tree and run our class
+/// 
+/// Tree:
+/// 
+///             4
+///            / \
+///           /   \
+///          2    90
+///         / \   /
+///        0   3 14
+///               \
+///               45
+/// 
+/// </summary>
 void main() {
     BST<int> bst;
     
@@ -15,8 +30,20 @@ void main() {
     bst.insert(14);
     bst.insert(45);
 
-    cout << "Preorder traversal: ";
+    cout << "Preorder traversal:  ";
     bst.pre_order_traversal([](auto key) {
+        cout << key << " ";
+    });
+    cout << endl;
+
+    cout << "Inorder traversal:   ";
+    bst.in_order_traversal([](auto key) {
+        cout << key << " ";
+    });
+    cout << endl;
+
+    cout << "Postorder traversal: ";
+    bst.post_order_traversal([](auto key) {
         cout << key << " ";
     });
     cout << endl;
