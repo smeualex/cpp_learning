@@ -3,9 +3,11 @@
 #include <algorithm>
 #include <queue>
 #include <memory>
+#include <functional>
 
 // binary search tree
 // https://codereview.stackexchange.com/questions/191211/binary-search-tree-data-structure-implementation-in-c11-using-smart-pointers
+
 
 template <typename key_t>
 class BST {
@@ -27,16 +29,19 @@ private:
 
     std::shared_ptr<node> root;
     
-    void pre_order_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const {
-        if (x == nullptr) 
+    typedef std::function< void(std::shared_ptr<node>) > traversal_handler;
+
+    void pre_order_traversal(const std::shared_ptr<node>& x, traversal_handler handler) const {
+        if (x == nullptr)
             return;
-        
+
         handler(x);
-        
+
         pre_order_traversal(x->left, handler);
         pre_order_traversal(x->right, handler);
     }
-    void in_order_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const{
+
+    void in_order_traversal(const std::shared_ptr<node> &x, traversal_handler handler) const{
         if (x == nullptr) 
             return;
         
@@ -46,7 +51,8 @@ private:
         
         in_order_traversal(x->right, handler);
     }
-    void post_order_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const {
+
+    void post_order_traversal(const std::shared_ptr<node> &x, traversal_handler handler) const {
         if (x == nullptr) 
             return;
         
@@ -56,7 +62,7 @@ private:
         handler(x);
     }
 
-    void breadth_first_traversal(const std::shared_ptr<node> &x, void handler(std::shared_ptr<node>)) const {
+    void breadth_first_traversal(const std::shared_ptr<node> &x, traversal_handler handler) const {
         if (x == nullptr) 
             return;
         
@@ -89,19 +95,19 @@ private:
 
 public:
 
-    void pre_order_traversal(void handler(std::shared_ptr<node>)) const {
+    void pre_order_traversal(traversal_handler handler) const {
         pre_order_traversal(root, handler);
     }
-    
-    void in_order_traversal(void handler(std::shared_ptr<node>)) const {
+
+    void in_order_traversal(traversal_handler handler) const {
         in_order_traversal(root, handler);
     }
 
-    void post_order_traversal(void handler(std::shared_ptr<node>)) const {
+    void post_order_traversal(traversal_handler handler) const {
         post_order_traversal(root, handler);
     }
 
-    void breadth_first_traversal(void handler(std::shared_ptr<node>)) const {
+    void breadth_first_traversal(traversal_handler handler) const {
         breadth_first_traversal(root, handler);
     }
 
