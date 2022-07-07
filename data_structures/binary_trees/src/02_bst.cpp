@@ -1,6 +1,9 @@
 #include "bst.h"
 #include<iostream>
 
+using std::cout;
+using std::endl;
+
 void main() {
     BST<int> bst;
     
@@ -12,8 +15,10 @@ void main() {
     bst.insert(14);
     bst.insert(45);
 
-   
-    bst.in_order_traversal([](auto node){ 
-            std::cout << node->key << std::endl;
-        });
+    cout << "Preorder traversal: ";
+    bst.pre_order_traversal([](auto node) {
+        cout << node->key << " ";
+    });
+    cout << endl;
+
 }
