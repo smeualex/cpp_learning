@@ -16,8 +16,8 @@ void main() {
     bst.insert(45);
 
     cout << "Preorder traversal: ";
-    bst.pre_order_traversal([](auto node) {
-        cout << node->key << " ";
+    bst.pre_order_traversal([](auto key) {
+        cout << key << " ";
     });
     cout << endl;
 

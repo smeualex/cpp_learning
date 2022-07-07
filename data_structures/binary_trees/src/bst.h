@@ -29,13 +29,13 @@ private:
 
     std::shared_ptr<node> root;
     
-    typedef std::function< void(std::shared_ptr<node>) > traversal_handler;
+    typedef std::function< void(const key_t&) > traversal_handler;
 
     void pre_order_traversal(const std::shared_ptr<node>& x, traversal_handler handler) const {
         if (x == nullptr)
             return;
 
-        handler(x);
+        handler(x->key);
 
         pre_order_traversal(x->left, handler);
         pre_order_traversal(x->right, handler);
@@ -47,7 +47,7 @@ private:
         
         in_order_traversal(x->left, handler);
         
-        handler(x);
+        handler(x->key);
         
         in_order_traversal(x->right, handler);
     }
@@ -59,7 +59,7 @@ private:
         post_order_traversal(x->left, handler);
         post_order_traversal(x->right, handler);
         
-        handler(x);
+        handler(x->key);
     }
 
     void breadth_first_traversal(const std::shared_ptr<node> &x, traversal_handler handler) const {
