@@ -19,9 +19,10 @@ using std::endl;
 ///               45
 /// 
 /// </summary>
-void main() {
+
+void test_bst_int() {
     BST<int> bst;
-    
+
     bst.insert(4);
     bst.insert(2);
     bst.insert(90);
@@ -40,8 +41,8 @@ void main() {
     cout << "               \\   " << endl;
     cout << "               45  " << endl;
     cout << endl;
-    cout << "bst.size    = " << bst.size()    << endl;
-    cout << "bst.height  = " << bst.height()  << endl;
+    cout << "bst.size    = " << bst.size() << endl;
+    cout << "bst.height  = " << bst.height() << endl;
     cout << "bst.minimum = " << bst.minimum()->key << endl;
     cout << "bst.maximum = " << bst.maximum()->key << endl;
     cout << "------------------------------------------------" << endl;
@@ -49,27 +50,27 @@ void main() {
     cout << "Preorder traversal:  ";
     bst.preorder([](auto key) {
         cout << key << " ";
-    });
+        });
     cout << endl;
 
     cout << "Inorder traversal:   ";
     bst.inorder([](auto key) {
         cout << key << " ";
-    });
+        });
     cout << endl;
 
     cout << "Postorder traversal: ";
     bst.postorder([](auto key) {
         cout << key << " ";
-    });
+        });
     cout << endl;
 
     cout << "------------------------------------------------" << endl;
-    
+
     cout << "bfs: ";
     bst.bfs([](auto key) {
         cout << key << " ";
-    });
+        });
     cout << endl;
 
     cout << "------------------------------------------------" << endl;
@@ -103,9 +104,9 @@ void main() {
         cout << tmp->key << endl;
     else
         cout << "none" << endl;
-    
+
     cout << "------------------------------------------------" << endl;
-    
+
     //////////////////////////////////////////////////////////////////////
     // successors
     cout << "     bst.successor(14)   = ";
@@ -137,4 +138,50 @@ void main() {
         cout << "none" << endl;
 
     cout << "------------------------------------------------" << endl;
+
+    auto diagonals = bst.diagonalTraversal(DiagonalDirection::leftToRight);
+
+    cout << "Diagonal traversal [L-R]: " << endl;
+
+    for (auto diag : diagonals) {
+        auto v = diag.second;
+        cout << diag.first + 1 << ": ";
+        for (auto k : v) {
+            cout << k << " ";
+        }
+        cout << endl;
+    }
+
+    cout << "------------------------------------------------" << endl;
+
+    auto diagonals2 = bst.diagonalTraversal(DiagonalDirection::rightToLeft);
+
+    cout << "Diagonal traversal [R-L]: " << endl;
+
+    for (auto diag : diagonals2) {
+        auto v = diag.second;
+        cout << diag.first + 1 << ": ";
+        for (auto k : v) {
+            cout << k << " ";
+        }
+        cout << endl;
+    }
+}
+
+void test_bst_new() {
+    cout << "------------------------------------------------" << endl;
+    cout << "bst with new" << endl;
+    BST<int>* bst = new BST<int>();
+    bst->insert(43);
+    bst->insert(22);
+    bst->insert(34);
+    bst->insert(3);
+    bst->insert(45);
+    bst->inorder([](int key) { cout << key << " "; });
+    delete bst;
+}
+
+void main() {
+    test_bst_int();
+    test_bst_new();
 }

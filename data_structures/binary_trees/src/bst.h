@@ -1,9 +1,20 @@
 #pragma once
 
 #include <algorithm>
-#include <queue>
-#include <memory>
 #include <functional>
+#include <queue>
+#include <map>
+#include <memory>
+#include <vector>
+
+#ifdef _DEBUG
+using namespace std;
+#endif
+
+enum class DiagonalDirection {
+    leftToRight,
+    rightToLeft
+};
 
 // binary search tree
 // https://codereview.stackexchange.com/questions/191211/binary-search-tree-data-structure-implementation-in-c11-using-smart-pointers
@@ -23,6 +34,14 @@ private:
         explicit node(const key_t _key) 
             : key(_key)
         { }
+
+#ifdef _DEBUG
+        ~node() {
+            cout << "   > destroying node: " << key << endl;
+            delete left;
+            delete right;
+        }
+#endif
     };
 
     std::shared_ptr<node> root;
@@ -79,6 +98,34 @@ private:
         }
     }
 
+    void diagonalTraversalLR(node* root, int distance, 
+        std::map<int, std::vector<key_t>> &diagonals) const {
+
+        if (!root)
+            return;
+
+        diagonals[distance].push_back(root->key);
+
+        // vertical distance increases on the left
+        diagonalTraversalLR(root->left,  distance + 1, diagonals);
+        // but remains the same on the right
+        diagonalTraversalLR(root->right, distance    , diagonals);
+    }
+
+    void diagonalTraversalRL(node* root, int distance,
+        std::map<int, std::vector<key_t>>& diagonals) const {
+
+        if (!root)
+            return;
+
+        diagonals[distance].push_back(root->key);
+
+        // vertical distance increases to the right
+        diagonalTraversalRL(root->right, distance + 1, diagonals);
+        // but stays the same to the left
+        diagonalTraversalRL(root->left,  distance,     diagonals);
+    }
+
     const unsigned long long height(node* x) const {
         if (x == nullptr)   
             return 0;
@@ -92,6 +139,14 @@ private:
     }
 
 public:
+
+#ifdef _DEBUG
+    ~BST() {
+        cout << endl;
+        cout << "================================================" << endl;
+        cout << "Destroying BST " << endl;
+    }
+#endif
 
     void preorder(traversal_handler handler) const {
         preorder(root.get(), handler);
@@ -107,6 +162,21 @@ public:
 
     void bfs(traversal_handler handler) const {
         bfs(root.get(), handler);
+    }
+
+    auto diagonalTraversal(const DiagonalDirection direction = DiagonalDirection::leftToRight) const {
+        std::map<int, std::vector<key_t>> diagonals;
+        
+        switch (direction) {
+        case DiagonalDirection::leftToRight:
+            diagonalTraversalLR(root.get(), 0, diagonals);
+            break;
+
+        case DiagonalDirection::rightToLeft:
+            diagonalTraversalRL(root.get(), 0, diagonals);
+            break;
+        }
+        return diagonals;
     }
 
 /// <summary>
