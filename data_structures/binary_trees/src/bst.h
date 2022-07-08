@@ -7,7 +7,8 @@
 
 // binary search tree
 // https://codereview.stackexchange.com/questions/191211/binary-search-tree-data-structure-implementation-in-c11-using-smart-pointers
-
+//
+// https://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/
 
 template <typename key_t>
 class BST {
@@ -16,8 +17,8 @@ private:
     struct node {
         key_t key;                  
         node* parent{ nullptr };
-        std::shared_ptr<node> left{ nullptr };
-        std::shared_ptr<node> right{ nullptr };
+        node* left  { nullptr };
+        node* right { nullptr };
 
         explicit node(const key_t _key) 
             : key(_key)
@@ -28,7 +29,7 @@ private:
     
     typedef std::function< void(const key_t&) > traversal_handler;
 
-    void preorder(const std::shared_ptr<node>& x, traversal_handler handler) const {
+    void preorder(node* x, traversal_handler handler) const {
         if (x == nullptr)
             return;
 
@@ -38,7 +39,7 @@ private:
         preorder(x->right, handler);
     }
 
-    void inorder(const std::shared_ptr<node> &x, traversal_handler handler) const{
+    void inorder(node* x, traversal_handler handler) const{
         if (x == nullptr) 
             return;
         
@@ -49,7 +50,7 @@ private:
         inorder(x->right, handler);
     }
 
-    void postorder(const std::shared_ptr<node> &x, traversal_handler handler) const {
+    void postorder(node* x, traversal_handler handler) const {
         if (x == nullptr) 
             return;
         
@@ -59,16 +60,16 @@ private:
         handler(x->key);
     }
 
-    void bfs(const std::shared_ptr<node> &x, traversal_handler handler) const {
+    void bfs(node* x, traversal_handler handler) const {
         if (x == nullptr) 
             return;
         
-        std::queue <std::shared_ptr<node> > queue;
+        std::queue <node*> queue;
         
         queue.push(x);
         while(queue.empty() == false) {
-            std::shared_ptr<node> y = queue.front();
-            handler(y);
+            node* y = queue.front();
+            handler(y->key);
             queue.pop();
             
             if (y->left != nullptr)
@@ -78,13 +79,13 @@ private:
         }
     }
 
-    const unsigned long long height(const std::shared_ptr<node> &x) const {
+    const unsigned long long height(node* x) const {
         if (x == nullptr)   
             return 0;
         return std::max(height(x->left), height(x->right)) + 1;
     }
 
-    const unsigned long long size(const std::shared_ptr<node> &x) const {
+    const unsigned long long size(node* x) const {
         if (x == nullptr) 
             return 0;
         return size(x->left) + size(x->right) + 1;
@@ -93,19 +94,19 @@ private:
 public:
 
     void preorder(traversal_handler handler) const {
-        preorder(root, handler);
+        preorder(root.get(), handler);
     }
 
     void inorder(traversal_handler handler) const {
-        inorder(root, handler);
+        inorder(root.get(), handler);
     }
 
     void postorder(traversal_handler handler) const {
-        postorder(root, handler);
+        postorder(root.get(), handler);
     }
 
     void bfs(traversal_handler handler) const {
-        bfs(root, handler);
+        bfs(root.get(), handler);
     }
 
 /// <summary>
@@ -159,12 +160,14 @@ public:
 /// </summary>
     bool insert(const key_t& key) {
 
-        std::shared_ptr<node> current = root;
+        node* current = root.get();
         node* parent = nullptr;
 
         // search the tree to get the right place to insert
         while(current!=nullptr) {
-            parent = current.get();
+            
+            parent = current;
+
             if (key > current->key) {
                 current = current->right;
             } else if (key < current->key) {
@@ -176,12 +179,12 @@ public:
         }
         
         // create the current node
-        current = std::make_shared<node>(key);
+        current = new node(key);
         current->parent = parent;
         
         // set up parent link to the current node
         if(parent == nullptr) {
-            root = current;
+            root = std::make_unique<node>(*current);
         } else if (current->key > parent->key) {
             parent->right = current;
         } else if (current->key < parent->key) {
@@ -192,7 +195,7 @@ public:
     }
    
     const std::shared_ptr<node> search(const key_t key) const {
-        std::shared_ptr<node> x = root;
+        node* x = root;
         while (x != nullptr) {
             if (key > x->key) {
                x = x->right;
@@ -205,29 +208,29 @@ public:
         return nullptr;
     }
     
-    const std::shared_ptr<node> minimum() const {
-        if (x == nullptr) 
+    const node* minimum() const {
+        if (root == nullptr) 
             return nullptr;
 
-        std::shared_ptr<node> x = root;
+        node* x = root.get();
         while(x->left != nullptr) 
             x = x->left;
         return x;
     }
     
-    const std::shared_ptr<node> maximum() const {
-        if (x == nullptr) 
+    const node* maximum() const {
+        if (root == nullptr) 
             return nullptr;
         
-        std::shared_ptr<node> x = root;
+        node* x = root.get();
         while(x->right != nullptr)
             x = x->right;
         return x;
     }
      
-    const std::shared_ptr<node> successor(const key_t key) const {
+    const node* successor(const key_t& key) const {
         
-        std::shared_ptr<node> x = root;
+        node* x = root.get();
 
         while (x != nullptr) {
             if (key > x->key) {
@@ -243,8 +246,8 @@ public:
             }
 
             node* parent = x->parent;
-            while (parent != nullptr && x == parent->right.get()) {
-                x = parent.get();
+            while (parent != nullptr && x == parent->right) {
+                x = parent;
                 parent = parent->parent;
             }
 
@@ -254,9 +257,9 @@ public:
         return nullptr;
     }
     
-    const std::shared_ptr<node> predecessor(const key_t key) const {
+    const node* predecessor(const key_t& key) const {
         
-        std::shared_ptr<node> x = root;
+        node* x = root.get();
 
         while (x != nullptr) {
             if (key > x->key) {
@@ -266,15 +269,18 @@ public:
             } else {
                 if (x->left != nullptr) {
                     x = x->left;
-                    while(x->right != nullptr) x = x->right;
+                    while(x->right != nullptr) 
+                        x = x->right;
+                    
                     return x;
                 }
 
                 node* parent = x->parent;
-                while (parent != nullptr && x == parent->left.get()) {
+                while (parent != nullptr && x == parent->left) {
                     x = parent;
                     parent = parent->parent;
                 }
+
                 return parent;
             }
         }
@@ -282,11 +288,11 @@ public:
     }
 
     const unsigned long long height() const {
-        return height(root);
+        return height(root.get());
     }
 
     const unsigned long long size() const {
-        return size(root);
+        return size(root.get());
     }
 
     const bool isEmpty() const {
