@@ -15,15 +15,12 @@ private:
 
     struct node {
         key_t key;                  
-        node* parent; 
-        std::shared_ptr<node> left; 
-        std::shared_ptr<node> right;
+        node* parent{ nullptr };
+        std::shared_ptr<node> left{ nullptr };
+        std::shared_ptr<node> right{ nullptr };
 
-        node(const key_t _key) 
+        explicit node(const key_t _key) 
             : key(_key)
-            , parent(nullptr)
-            , left(nullptr)
-            , right(nullptr)
         { }
     };
 
