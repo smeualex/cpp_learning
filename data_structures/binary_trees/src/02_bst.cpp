@@ -31,19 +31,19 @@ void main() {
     bst.insert(45);
 
     cout << "Preorder traversal:  ";
-    bst.pre_order_traversal([](auto key) {
+    bst.preorder([](auto key) {
         cout << key << " ";
     });
     cout << endl;
 
     cout << "Inorder traversal:   ";
-    bst.in_order_traversal([](auto key) {
+    bst.inorder([](auto key) {
         cout << key << " ";
     });
     cout << endl;
 
     cout << "Postorder traversal: ";
-    bst.post_order_traversal([](auto key) {
+    bst.postorder([](auto key) {
         cout << key << " ";
     });
     cout << endl;
