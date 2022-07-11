@@ -1,4 +1,5 @@
 #include "bst.h"
+
 #include<iostream>
 
 using std::cout;
@@ -46,7 +47,8 @@ void test_bst_int() {
     cout << "bst.minimum = " << bst.minimum()->key << endl;
     cout << "bst.maximum = " << bst.maximum()->key << endl;
     cout << "------------------------------------------------" << endl;
-
+    bst.prettyPrint(std::cout);
+    cout << "------------------------------------------------" << endl;
     cout << "Preorder traversal:  ";
     bst.preorder([](auto key) {
         cout << key << " ";

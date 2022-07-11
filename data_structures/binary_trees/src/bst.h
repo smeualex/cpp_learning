@@ -1,10 +1,11 @@
-#pragma once
+﻿#pragma once
 
 #include <algorithm>
 #include <functional>
 #include <queue>
 #include <map>
 #include <memory>
+#include <ostream>
 #include <vector>
 
 #ifdef _DEBUG
@@ -368,4 +369,26 @@ public:
     const bool isEmpty() const {
         return (root == nullptr);
     }
+
+    // pretty printing
+    std::ostream& prettyPrint(std::ostream& os, const std::string& prefix, const node* x, bool isLeft) {
+        if (x == nullptr)
+            return os;
+
+        os << prefix;
+        os << (isLeft ? "+--" : "\\--");
+        os << x->key << std::endl;
+
+        prettyPrint(os, prefix + (isLeft ? "|   " : "    "), x->left,  true );
+        prettyPrint(os, prefix + (isLeft ? "|   " : "    "), x->right, false);
+
+        return os;
+    }
+
+    std::ostream& prettyPrint(std::ostream& os) {
+        return prettyPrint(os, "", root.get(), false);
+    }
+    /*friend std::ostream& operator<<(std::ostream& os, const BST<key_t>& tree) {
+        os << tree.prettyPrint(os, "", tree.root.get(), false);
+    }*/
 };
